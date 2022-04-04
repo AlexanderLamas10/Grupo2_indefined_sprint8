@@ -1,0 +1,125 @@
+<html>
+<%- include ("../partials/head") %> 
+<body>
+<%- include("../partials/header") %> 
+<main class="product-edit">
+    <section class="titulos"><h2>Modificar producto: <%= productToEdit.name %></h2></section>
+    
+    
+    <section class="forms">
+        <% for( let i = 0; i < productToEdit.images.length; i++ ) { %>
+        <img src="/images/product-image/<%= productToEdit.images[i].url_name %>" alt="<%= productToEdit.name%>" >
+        <% } %>
+        
+        <form action="/products/<%= productToEdit.id %>?_method=PUT" method="POST"><!--enctype="multipart/form-data">-->
+            <!--<div>
+                <label for="id-product" value="id-product">ID de producto a modificar:<input type="text"  name="id-product" required></label>
+            </div>-->
+            <div>
+                <label for="name" value="name-product">Nombre:<input type="text" value="<%= productToEdit.name %>" name="name" required></label>
+            </div>
+            <div class="product-desc"> 
+                <label for="description">Descripción:</label>
+                <textarea minlength="4" name="description" required><%= productToEdit.description%></textarea>
+            </div>  
+            <div>
+                <label for="categories_id">Categoría:</label>
+                <select name="categories_id" id="prod-category">
+                    <option value="" disabled>- Seleccione una opcion - </option>
+                    <% allCategories.forEach(category => { %>
+                    <option value="<%= category.id %>"<% if (productToEdit.categories_id == category.id) { %> <%= 'selected' %><% }; %>><%= category.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div>
+                <label for="sizes_id">Talle: </label>
+                <select name="sizes_id" id="prod-size">
+                    <option value="" disabled>- Seleccione una opcion - </option>
+                    <% allSizes.forEach(size => { %>
+                    <option value="<%= size.id %>"<% if (productToEdit.sizes_id == size.id) { %> <%= 'selected' %><% }; %>><%= size.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div>
+                <label for="stock">stock: </label>
+                <input type="number" value="<%= productToEdit.stock %>" name="stock" id="cantidad-product" required>
+            </div>
+            <div>
+                <label for="stock_min">stock_min: </label>
+                <input type="number" value="<%= productToEdit.stock_min %>" name="stock_min" id="cantidad-product" required>
+            </div>
+            <div>
+                <label for="stock_max">stock_max: </label>
+                <input type="number" value="<%= productToEdit.stock_max %>" name="stock_max" id="cantidad-product" required>
+            </div>
+            <div>
+                <label for="color_id">Color: </label>
+                <select name="color_id" id="prod-size">
+                    <option value="" disabled>- Seleccione una opcion - </option>
+                    <% allColors.forEach(color => { %>
+                    <option value="<%= color.id %>"<% if (productToEdit.colors_id == color.id) { %> <%= 'selected' %><% }; %>><%= color.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div>
+                <label for="price">Precio: </label>
+                <input type="number" value="<%= productToEdit.price %>" name="price" required>
+            </div>
+            <div>
+                <label for="discounts_id">Descuento: </label>
+                <select name="discounts_id" id="prod-size">
+                    <option value="" disabled>- Seleccione una opcion - </option>
+                    <% allDiscounts.forEach(discount => { %>
+                    <option value="<%= discount.id %>"<% if (productToEdit.discounts_id == discount.id) { %> <%= 'selected' %><% }; %>><%= discount.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div>
+                <label for="visibility">Visible: </label>
+                <select name="visibility" id="prod-visibility">
+                    <option value="" disabled> seleccione una opcion</option>
+                    <% if(productToEdit.visibility == 1){ %>
+                        <option value="1" selected>SI</option>
+                        <option value="0">NO</option>
+                    <% }else{ %>  
+                        <option value="1">SI</option>
+                        <option value="0" selected>NO</option>
+                    <% } %>
+                </select>
+                
+            </div>
+            <div>
+                <label for="recommended">Destacar en inicio: </label>
+                <select name="recommended" id="prod-recommended">
+                    <option value="" disabled> seleccione una opcion</option>
+                    <% if(productToEdit.recommended == 1){ %>
+                        <option value="1" selected>SI</option>
+                        <option value="0">NO</option>
+                    <% }else{ %>  
+                        <option value="1">SI</option>
+                        <option value="0" selected>NO</option>
+                    <% } %>
+                </select>
+                
+            </div>
+            <!-- 
+                
+                <div>
+                <label for="image-product">Imagen:</label>
+                <input type="file" name="image-product" accept="image/png">
+                <input type="hidden" name="oldImage" value="<%=  %>">
+            </div>
+            -->
+            
+                
+            
+            <div class="submit">
+                <button type="submit" name="submit">Guardar cambios</button>
+            </div>
+        </form>
+    </section>
+</main>
+<%- include("../partials/footer") %> 
+</body>
+</html>

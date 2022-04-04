@@ -1,0 +1,37 @@
+<html>
+<%- include ("../partials/head") %> 
+<body>
+    <%- include("../partials/header")%>
+    <main class="products">
+        
+    <h3>PRODUCTOS</h3>
+        
+        <section class="sec-carrousel">
+            <i class="fas fa-arrow-left"></i>
+            <% products.forEach(function (products) {%>
+                <article class="product">
+                    <% for( let i = 0; i < products.images.length; i++ ) { %>
+                        <img src="/images/product-image/<%= products.images[i].url_name %>" alt="<%= products.name %>" >
+                    <% } %>
+                    
+                    <div class="product-description">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p class="p-name"><%= products.name %></p>
+                            <p class="p-price" style="text-decoration:line-through"> $ <%= products.price %></p><p class="p-descuentos">-<%= products.discounts.name %>% </p>
+                            <%let descuento= products.price-((products.price/100)*products.discounts.name) %>
+                            <%let conDecimal = descuento.toFixed(2); %>
+                            <h3>$<%= conDecimal %> </h3>
+                            <a href="products/<%= products.id %> "><button class="ver-btn">VER</button></a>
+                    </div>
+                    
+                </article>
+                
+            <% }) %>
+                
+                <i class="fas fa-arrow-right"></i>
+        </section>
+    </main>
+    <%- include("../partials/footer") %> 
+</body>
+
+</html>

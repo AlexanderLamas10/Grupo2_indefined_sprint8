@@ -1,0 +1,89 @@
+</html>
+<%- include ("../partials/head") %> 
+    <body>
+        <%- include("../partials/header.ejs") %>
+
+    <main class="product-detail">
+    <section class="container">
+            <div class="columna-images">
+                <% for( let i = 0; i < productDetail.images.length; i++ ) { %>
+                    <img src="/images/product-image/<%= productDetail.images[i].url_name %>" id= "ProductImg" alt="<%= productDetail.name %>">
+                <% } %>
+                
+                <div class="small-img-row">
+                    <div class="small-img">
+                        <% for( let i = 0; i < productDetail.images.length; i++ ) { %>
+                        <img src="/images/product-image/<%= productDetail.images[i].url_name%>"  alt="<%= productDetail.name %>"  class="small-img">
+                        <% } %>
+                    </div>
+                    <div class="small-img">
+                        <% for( let i = 0; i < productDetail.images.length; i++ ) { %>
+                            <img src="/images/product-image/<%= productDetail.images[i].url_name%>"  alt="<%= productDetail.name %>"  class="small-img">
+                        <% } %>
+                    </div>
+                    <div class="small-img">
+                        <% for( let i = 0; i < productDetail.images.length; i++ ) { %>
+                            <img src="/images/product-image/<%= productDetail.images[i].url_name%>"  alt="<%= productDetail.name %>"  class="small-img">
+                        <% } %>
+                    </div>
+                    <div class="small-img">
+                        <% for( let i = 0; i < productDetail.images.length; i++ ) { %>
+                            <img src="/images/product-image/<%= productDetail.images[i].url_name%>"  alt="<%= productDetail.name %>"  class="small-img">
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="columna-desc">
+                <h2 class=product-name><%= productDetail.name %></h2>
+                <h2 class=product-price style="text-decoration:line-through"> $<%= productDetail.price %></h2><h3 class=product-discount>-<%= productDetail.discounts.name %>%</h3>
+                <%let descuento= productDetail.price-((productDetail.price/100)*productDetail.discounts.name) %>
+                            <%let conDecimal = descuento.toFixed(2); %>
+                            <h3>$<%= conDecimal %> </h3>
+
+                <form action="/products/carrito-de-compras" method="post">
+                    <div class="elec-talle-color">
+                        <div class="elec-talle">
+                        <label for="prod-size">Talle:</label>
+                            <select name="prod-size" id="prod-size">
+                                <option value="<%= productDetail.sizes.id %>" selected>  <%= productDetail.sizes.name %> </option>
+                                
+                            </select>
+                        </div>
+                        <div class="elec-color">
+                        <label for="prod-color">Color:</label>
+                            <select name="prod-color" id="prod-color">
+                                <option value="<%= productDetail.colors.id %>" selected>  <%= productDetail.colors.name %> </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cant-elec">
+                        <label for="cantidad">Cantidad:</label>
+                        <div class="button-cant-elec">
+                            <div class="cant-elec"><button class ="menos" type="submit" value><i class="fas fa-minus"></i></button><p class="cantidad">1</p><button class ="mas" type="submit" value><i class="fas fa-plus"></i></button></div>
+                        </div>
+                    </div>
+                    <% if (!locals.isLogged) { %>
+                        <br>
+                        <br>
+                        <p style="color:orangered">Podés loguearte para agregar productos al carrito</p>
+                        <a href="/login" class="button"> Agregar al carrito </a>
+                    <%  } %>
+
+                    <% if (locals.isLogged) { %>
+                        <a href="/products/carrito-de-compras" class="button"> Agregar al carrito </a>
+                    <%  } %>
+                </form>
+                <h3 class="desc-prod">Detalles del productos</h3>
+                <p><%= productDetail.description %></p>
+                </div>
+            </div>
+            
+
+    </section>
+
+
+    </main>
+
+    <%- include("../partials/footer") %> 
+</body>
+</html>

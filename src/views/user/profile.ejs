@@ -1,0 +1,16 @@
+<%- include ("../partials/head") %> 
+<body>
+    <%- include("../partials/header.ejs") %>
+    <main class="profile">
+        <section>
+            <h3>Bienvenidx</h3>
+            <h2> <%= user.name %> !</h2>
+            <img src="/images/user-image/<%= avatars%>" class="avatar">
+
+            <a href="/user/<%= user.id %>/edit"><button>EDITAR</button></a>
+            
+        </section>
+    </main>
+    <%- include("../partials/footer") %> 
+</body>
+</html>

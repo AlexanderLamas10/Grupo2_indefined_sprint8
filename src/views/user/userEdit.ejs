@@ -1,0 +1,64 @@
+<%- include ("../partials/head") %> 
+    <body>
+        <%- include("../partials/header.ejs") %>
+        <main class ="register">
+            <section class="titulos">
+                <h1>Hola <%= user.name %> ! </h2>
+                <h3>¿Qué deseas editar de tu perfil?</h5>
+            </section>
+        
+            <section class="forms">
+                
+                <img src="/images/user-image/<%= avatars%>" class="avatar">
+                
+                <form action="/user/<%= user.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+
+                    
+                    <div class="nombreApellido">
+                        <label for="name">Nombre<b>(*)</b><input type="text" name="name" value="<%= user.name %>" minlength="3" ></label>
+                        <% if (locals.errors && errors.name) { %>
+                            <div class="text-danger">
+                                <%= errors.name.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+        
+                    <div class="email">
+                        <label for="email">Email <b>(*)</b><input type="text" name="email" value="<%= user.email %>"  placeholder="ejemplo@gmail.com" ></label>
+                        <% if (locals.errors && errors.email) { %>
+                            <div class="text-danger">
+                                <%= errors.email.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+        
+                    <div class="fechaNacimiento"><label for="date">Fecha de nacimiento<input type="date" value="<%= user.date %>" name="date"></label></div>
+
+                    <div class="password"><label for="password">Contraseña<b>(*)</b>
+                        <input type="password"  name="password"   placeholder="***********" ></label>
+                        <% if (locals.errors && errors.password) { %>
+                            <div class="text-danger">
+                                <%= errors.password.msg %> 
+                            </div>
+                        <% } %>
+                        <input type="hidden" name="oldpassword" value="<%= user.password %>">
+                    </div>
+                    <div>
+                        <label for="avatar">Avatar</label>
+                        <input type="file" name="avatar" id="avatar" accept=".jpg, .png">
+                        <input type="hidden" name="oldAvatar" value="<%= avatars %>">
+                    </div>
+                    
+        
+                    <div class="submit"><label for="submit"><button type="submit" id="submit">Editar</button></label></div>
+                </form>
+                
+        
+            </section>
+            
+
+        </main>
+
+        <%- include("../partials/footer") %>
+    </body>
+    </html>
