@@ -1,16 +1,19 @@
 let nombreApellido = document.querySelector("input.nombreApellido");
 let email = document.querySelector("input.email");
 let password = document.querySelector("input.password");
+let passwordC = document.querySelector("input.passwordConfirm");
 let formulario = document.querySelector("form.registerjs");
 
 // errores
 let errorNombre = document.querySelector("#errorNombre");
 let errorEmail = document.querySelector("#errorEmail");
 let errorPassword = document.querySelector("#errorPassword");
+let errorPasswordC = document.querySelector("#errorPasswordC");
 
 nombreApellido.addEventListener("blur", nombreValidator)
 email.addEventListener("blur",emailValidator)
 password.addEventListener("blur",passwordValidator)
+passwordC.addEventListener("blur",passwordCValidator)
 
 let errores = {};
 
@@ -56,6 +59,25 @@ function emailValidator()
 
 function passwordValidator()
     {
+        let inputPassword = passwordC.value;
+            if (inputPassword == ""){
+                let error = "Ingresa una contraseña";
+                errorPasswordC.innerHTML = error
+                errores.passwordC = error;
+            }
+            else if (inputPassword != "" && inputPassword.length < 8){
+                let error = "La contraseña deberá tener al menos 8 caracteres";
+                errorPasswordC.innerHTML = error
+                errores.passwordC = error;
+            }
+            else{
+                errorPasswordC.innerHTML = "";
+                errores.passwordC = "";
+            };
+    }
+
+    function passwordCValidator()
+    {
         let inputPassword = password.value;
             if (inputPassword == ""){
                 let error = "Ingresa una contraseña";
@@ -72,7 +94,6 @@ function passwordValidator()
                 errores.password = "";
             };
     }
-
 formulario.addEventListener("submit",function(event)
     {
         if (errores.length > 0)

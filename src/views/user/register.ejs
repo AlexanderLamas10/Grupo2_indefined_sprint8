@@ -52,6 +52,14 @@
                         <% } %>
                         <div id = "errorPassword"></div>
                     </div>
+                    <div class="passwordConfirm"><label for="passwordConfirm">Confirme contraseña<b>(*)</b><input class = "passwordConfirm" type="password" name="passwordConfirm"   placeholder="min. 8 caracteres" ></label>
+                        <% if (locals.errors && errors.password) { %>
+                            <div class="text-danger" >
+                                <%= errors.password.msg %> 
+                            </div>
+                        <% } %>
+                        <div id = "errorPasswordC"></div>
+                    </div>
 
                     <div>
                         <label for="avatar">Avatar:</label>

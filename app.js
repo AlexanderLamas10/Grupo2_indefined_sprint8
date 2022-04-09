@@ -35,9 +35,13 @@ const mainRoutes = require('./src/routes/mainRoutes');
 const productRoutes = require("./src/routes/productRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 
+const apiUser=require("./src/routes/API/userApiRoute")
+const apiProd=require("./src/routes/API/productApiRoute")
 app.use('/', mainRoutes)
 app.use('/products', productRoutes)
 app.use('/', userRoutes)
+app.use("/api",apiUser)
+app.use("/api",apiProd)
 
 app.use((req,res,next)=>{
     res.status(404).render('not-found')
