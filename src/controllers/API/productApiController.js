@@ -4,7 +4,7 @@ const Product=DB.Product
 module.exports = {
     products:(req,res)=>{
         Product
-            .findAll({include:["colors"]})
+            .findAll()
             .then(prod=>{
                 let categoriesCount={};
                 let prodArray=[];
@@ -49,14 +49,29 @@ module.exports = {
             let id=req.params.id;
             Product
             .findByPk(id, 
-                {include:["discounts","categories","images","sizes","colors"],})
+                {include:["discounts","categories","images","sizes","colors"]})
             .then(prod=>{
+                
+                let  array=[
+                    {category:prod.categories.name},
+                    {size:prod.sizes.name},
+                    {color:prod.colors.name},
+                    {discount:prod.discounts.name}
+                ]
                 res.status(200).json({
-                    data:{
+                    productDetail:{
                         id:prod.id,
                         name:prod.name,
-                        color:prod.colors.name
-                    }
+                        price:prod.price,
+                        description:prod.description,
+                        stock:prod.stock,
+                        stock_min:prod.stock_min,
+                        stock_max:prod.stock_max
+                    },
+                    arrayRelational:array,
+                    urlImage:`http://localhost:3000/images/product_image/`+ prod.images[0].url_name
+                    
+                    
                 })
                 
                 
