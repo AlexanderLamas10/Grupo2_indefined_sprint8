@@ -7,7 +7,7 @@ Nuestro sitio ofrece indumentaria unisex para adolescentes. Con distintas seccio
 ## Integrantes: 
 <!-->
 - **Alexander Lamas** 🔎 <br>
-Técnico en computación. A veces comunicativo y participativo aunque tambien tímido.<br> "Casi nunca se me da el puesto de lider, pero no se pierde nada con intentarlo... ¿No crees?"<br>
+Técnico en computación. A veces comunicativo y participativo aunque a veces tímido.
 - **Camila Ledezma** 🌵 <br>
 Estudiante de ingeniería en sistemas, me gusta: el rock nacional, los Simpsons y juegos como Mario Bross.
 - **Gabriel Gomez** 🐣 <br>
